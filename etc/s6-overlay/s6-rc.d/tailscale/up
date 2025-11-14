@@ -1,0 +1,10 @@
+#!/command/execlineb -P
+with-contenv
+importas -u TAILSCALE_AUTH_KEY TAILSCALE_AUTH_KEY
+importas -u FLY_APP_NAME FLY_APP_NAME
+importas -u FLY_ALLOC_ID FLY_ALLOC_ID
+foreground {
+  tailscale up
+    --authkey=${TAILSCALE_AUTH_KEY}
+    --hostname=${FLY_APP_NAME}-${FLY_ALLOC_ID}
+}

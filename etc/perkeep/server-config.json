@@ -1,0 +1,7 @@
+{
+	"auth": "tailscale:ngalaiko@github",
+    "listen": ":3179",
+    "blobPath": "var/perkeep/blobs",
+    "packRelated": true,
+    "sqlite": "var/perkeep/index.sqlite"
+}

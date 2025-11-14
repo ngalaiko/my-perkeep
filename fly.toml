@@ -1,0 +1,21 @@
+app = 'perkeep'
+primary_region = 'arn'
+
+[[services]]
+  internal_port = 3179
+  protocol = "tcp"
+  min_machines_running = 1
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+    force_https = true
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 256

@@ -1,0 +1,4 @@
+[tools]
+pulumi = "3.207.0"
+flyctl = "0.3.216"
+fnox = "latest"
