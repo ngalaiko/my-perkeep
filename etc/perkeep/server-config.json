@@ -1,7 +1,9 @@
 {
-	"auth": "tailscale:ngalaiko@github",
-    "listen": ":3179",
-    "blobPath": "var/perkeep/blobs",
+	"identity": "4DAA1FB8B7EBFEFC",
+	"identitySecretRing": "/var/perkeep/identity-secring.gpg",
+	"auth": "tailscale:full-access-to-tailnet",
+    "listen": "tailscale:/var/perkeep/tsnet-perkeep",
+    "blobPath": "/var/perkeep/blobs",
     "packRelated": true,
-    "sqlite": "var/perkeep/index.sqlite"
+    "sqlite": "/var/perkeep/index.sqlite"
 }

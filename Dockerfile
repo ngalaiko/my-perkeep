@@ -24,8 +24,7 @@ RUN \
           echo "Cannot build, missing valid build platform." \
           exit 1; \
     esac; \
-    rm -rf "/tmp/*"; \
-    apk add --update --no-cache goaccess=1.9.4-r0 nginx=1.28.0-r3
+    rm -rf "/tmp/*";
 ADD "https://github.com/perkeep/perkeep/releases/download/v0.12/perkeep-linux-amd64.tar.gz" /tmp
 RUN sha256sum /tmp/perkeep-linux-amd64.tar.gz && \
 	echo "548c4d490c1ca3d65fef84a16c9c03b43f6a8bd8a33a8fea75d018d9b1510bf4  /tmp/perkeep-linux-amd64.tar.gz" | sha256sum -c && \
@@ -36,5 +35,12 @@ RUN sha256sum /tmp/perkeep-linux-amd64.tar.gz && \
 COPY init-wrapper /
 COPY --from=ghcr.io/tailscale/tailscale:v1.90.6 /usr/local/bin/tailscale /usr/local/bin/tailscale
 COPY --from=ghcr.io/tailscale/tailscale:v1.90.6 /usr/local/bin/tailscaled /usr/local/bin/tailscaled
-COPY etc /etc
+COPY etc/s6-overlay /etc/s6-overlay
+# add user for perkeep process
+RUN addgroup --system --gid 1001 perkeep && \
+    adduser --system --uid 1001 --ingroup perkeep keeper
+# make sure perkeep owns it's directories
+COPY --chown=keeper:perkeep etc/perkeep /etc/perkeep
+RUN mkdir -p /var/perkeep && \
+    chown -R keeper:perkeep /var/perkeep
 ENTRYPOINT ["/init-wrapper"]
