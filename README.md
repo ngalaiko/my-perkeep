@@ -1,8 +1,10 @@
 # perkeep
 
-This are configs for my personal perkeep instance hosted on fly.io
+This are configs for my personal perkeep instance hosted on [fly.io](https://fly.io) and exposed into [tailscale](https://tailscale.com) network 
 
-## secrets
+image is built around [s6-overlay](https://github.com/just-containers/s6-overlay) for process supervision
+
+## setup
 
 you need two things:
 
@@ -10,15 +12,15 @@ you need two things:
 
 i did not figure out how to make perkeep accept my newly generated gpg key, so i am using the one they generate by default
 
-you can generate it by starging `perkeepd` locally, and then it will generate a secring in the `.config/perkeep`
+you can generate it by starting `perkeepd` locally, and it will generate a secring in the `.config/perkeep`
 
-then, upload the secring as a secret
+then, upload the secring as a secret into fly
 
 ```
 fly secrets set PERKEEP_IDENTITY_SECRET_RING=$(cat ./var/perkeep/identity-secring.gpg | base64)
 ```
 
-and update identity in [server-config.json](./etc/perkeep/server-config.json)
+also, update identity in [server-config.json](./etc/perkeep/server-config.json)
 
 2. setup tailscale auth key
 
@@ -30,3 +32,5 @@ generate auth key [here](https://login.tailscale.com/admin/settings/keys). make 
 ```bash
 fly secrets set TS_AUTHKEY=<your tailscale auth key>
 ```
+
+that should be enough, just `fly deploy` now
