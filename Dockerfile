@@ -1,5 +1,6 @@
 FROM alpine:3.22
 LABEL maintainer="Nikita Galaiko nikita@galaiko.rocks"
+# Install s6-overlay
 ARG S6_OVERLAY_VERSION=3.2.1.0
 ADD "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz" /tmp
 ADD "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-aarch64.tar.xz" /tmp
@@ -25,6 +26,10 @@ RUN \
           exit 1; \
     esac; \
     rm -rf "/tmp/*";
+COPY init-wrapper /
+# install dependencies, gettext for envsubst
+RUN apk add --no-cache gettext
+# install perkeep
 ADD "https://github.com/perkeep/perkeep/releases/download/v0.12/perkeep-linux-amd64.tar.gz" /tmp
 RUN sha256sum /tmp/perkeep-linux-amd64.tar.gz && \
 	echo "548c4d490c1ca3d65fef84a16c9c03b43f6a8bd8a33a8fea75d018d9b1510bf4  /tmp/perkeep-linux-amd64.tar.gz" | sha256sum -c && \
@@ -32,8 +37,9 @@ RUN sha256sum /tmp/perkeep-linux-amd64.tar.gz && \
     mv /tmp/perkeepd /usr/local/bin/perkeepd && \
     chmod +x /usr/local/bin/perkeepd && \
     rm -rf /tmp/*
-COPY init-wrapper /
+# install tailscale
 COPY --from=ghcr.io/tailscale/tailscale:v1.90.6 /usr/local/bin/tailscaled /usr/local/bin/tailscaled
+# add s6-overlay service files
 COPY etc/s6-overlay /etc/s6-overlay
 # add user for perkeep process
 RUN addgroup --system --gid 1001 perkeep && \
