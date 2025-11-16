@@ -33,7 +33,6 @@ RUN sha256sum /tmp/perkeep-linux-amd64.tar.gz && \
     chmod +x /usr/local/bin/perkeepd && \
     rm -rf /tmp/*
 COPY init-wrapper /
-COPY --from=ghcr.io/tailscale/tailscale:v1.90.6 /usr/local/bin/tailscale /usr/local/bin/tailscale
 COPY --from=ghcr.io/tailscale/tailscale:v1.90.6 /usr/local/bin/tailscaled /usr/local/bin/tailscaled
 COPY etc/s6-overlay /etc/s6-overlay
 # add user for perkeep process
