@@ -1,9 +1,12 @@
 {
 	"identity": "4DAA1FB8B7EBFEFC",
 	"identitySecretRing": "/var/perkeep/identity-secring.gpg",
+
 	"auth": "tailscale:full-access-to-tailnet",
-    "listen": "tailscale:/var/perkeep/tsnet-perkeep",
+	"listen": "tailscale:/var/perkeep/tsnet-perkeep",
+
+	"postgres": "neondb_owner@ep-damp-bread-agosdv49-pooler.c-2.eu-central-1.aws.neon.tech:${NEONTECH_PASSWORD}",
+
 	"b2": "0036cfed748e70c0000000001:${BACKBLAZE_SECRET_KEY}:galaiko-rocks-perkeep:s3.eu-central-003.backblazeb2.com",
-    "packRelated": true,
-    "sqlite": "/var/perkeep/index.sqlite"
+	"packRelated": true
 }
