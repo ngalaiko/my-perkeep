@@ -20,7 +20,7 @@ then, upload the secring as a secret into fly
 fly secrets set PERKEEP_IDENTITY_SECRET_RING=$(cat ./var/perkeep/identity-secring.gpg | base64)
 ```
 
-also, update identity in [server-config.json](./etc/perkeep/server-config.json)
+also, update identity in [server-config.json.template](./etc/perkeep/server-config.json.template)
 
 2. setup tailscale auth key
 
