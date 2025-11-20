@@ -6,9 +6,13 @@ image is built around [s6-overlay](https://github.com/just-containers/s6-overlay
 
 ## setup
 
-you need two things:
+### [fly](https://fly.io)
 
-1. setup gpg identity
+```bash
+fly auth login
+```
+
+### gpg identity
 
 i did not figure out how to make perkeep accept my newly generated gpg key, so i am using the one they generate by default
 
@@ -22,7 +26,7 @@ fly secrets set PERKEEP_IDENTITY_SECRET_RING=$(cat ./var/perkeep/identity-secrin
 
 also, update identity in [server-config.json.template](./etc/perkeep/server-config.json.template)
 
-2. setup tailscale auth key
+### [tailscale](https://tailscale.com)
 
 generate auth key [here](https://login.tailscale.com/admin/settings/keys). make sure key is
 - [x] reusable
@@ -34,3 +38,22 @@ fly secrets set TS_AUTHKEY=<your tailscale auth key>
 ```
 
 that should be enough, just `fly deploy` now
+
+
+### [backblaze](https://www.backblaze.com/)
+
+make sure `b2` is up to date in [server-config.template.json](./etc/perkeep/server-config.json.template), format is `accessKey:secretKey:bucketName[/optional/dir]:hostname`
+
+```bash
+fly secrets set BACKBLAZE_SECRET_KEY=<secret key>
+```
+
+### [neon](https://neon.com)
+
+make sure `postgres` is up to date in [server-config.template.json](./etc/perkeep/server-config.json.template), format is `user@host:password`
+
+note that you'll need to make sure that database exists with the same name as `user`
+
+```bash
+fly secrets set NEONTECH_PASSWORD=<secret key>
+```
