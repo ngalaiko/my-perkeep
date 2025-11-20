@@ -3,7 +3,7 @@
 	"identitySecretRing": "/var/perkeep/identity-secring.gpg",
 	"auth": "tailscale:full-access-to-tailnet",
     "listen": "tailscale:/var/perkeep/tsnet-perkeep",
-    "blobPath": "/var/perkeep/blobs",
+	"b2": "0036cfed748e70c0000000001:${BACKBLAZE_SECRET_KEY}:galaiko-rocks-perkeep:s3.eu-central-003.backblazeb2.com",
     "packRelated": true,
     "sqlite": "/var/perkeep/index.sqlite"
 }
