@@ -27,8 +27,10 @@ RUN \
     esac; \
     rm -rf "/tmp/*";
 COPY init-wrapper /
-# install dependencies, gettext for envsubst
-RUN apk add --no-cache gettext
+# install dependencies
+# - gettext for envsubst 
+# - libjpeg-turbo-utils for djpeg (pekeep wants it)
+RUN apk add --no-cache gettext libjpeg-turbo-utils
 # install perkeep
 ADD "https://github.com/perkeep/perkeep/releases/download/v0.12/perkeep-linux-amd64.tar.gz" /tmp
 RUN sha256sum /tmp/perkeep-linux-amd64.tar.gz && \
