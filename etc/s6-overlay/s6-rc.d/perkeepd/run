@@ -1,4 +1,3 @@
 #!/command/execlineb -P
-with-contenv
 s6-setuidgid keeper
 perkeepd -configfile /etc/perkeep/server-config.json

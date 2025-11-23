@@ -40,14 +40,15 @@ RUN sha256sum /tmp/perkeep-linux-amd64.tar.gz && \
     chmod +x /usr/local/bin/perkeepd && \
     rm -rf /tmp/*
 # install tailscale
+COPY --from=ghcr.io/tailscale/tailscale:v1.90.6 /usr/local/bin/tailscale /usr/local/bin/tailscale
 COPY --from=ghcr.io/tailscale/tailscale:v1.90.6 /usr/local/bin/tailscaled /usr/local/bin/tailscaled
-# add s6-overlay service files
-COPY etc/s6-overlay /etc/s6-overlay
+# add config files files
+COPY etc/ /etc/
 # add user for perkeep process
+# and sure it owns perkeep's directories
 RUN addgroup --system --gid 1001 perkeep && \
-    adduser --system --uid 1001 --ingroup perkeep keeper
-# make sure perkeep owns it's directories
-COPY --chown=keeper:perkeep etc/perkeep /etc/perkeep
-RUN mkdir -p /var/perkeep && \
-    chown -R keeper:perkeep /var/perkeep
+	adduser --system --uid 1001 --ingroup perkeep keeper && \
+	mkdir -p /var/perkeep && \
+	chown -R keeper:perkeep /var/perkeep && \
+	chown -R keeper:perkeep /etc/perkeep
 ENTRYPOINT ["/init-wrapper"]

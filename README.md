@@ -37,7 +37,8 @@ generate auth key [here](https://login.tailscale.com/admin/settings/keys). make 
 fly secrets set TS_AUTHKEY=<your tailscale auth key>
 ```
 
-that should be enough, just `fly deploy` now
+then go to "services" and create service named "prekeep". ports are 80, 443.
+container will advertise this service for stable hostname like `perkeep.<network name>.ts.net`
 
 
 ### [backblaze](https://www.backblaze.com/)
@@ -57,3 +58,5 @@ note that you'll need to make sure that database exists with the same name as `u
 ```bash
 fly secrets set NEONTECH_PASSWORD=<secret key>
 ```
+
+that should be enough, just `fly deploy` now

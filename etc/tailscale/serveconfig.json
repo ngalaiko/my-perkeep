@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "services": {
+    "svc:perkeep": {
+      "endpoints": {
+        "tcp:443": "http://127.0.0.1:8080",
+        "tcp:80": "http://127.0.0.1:8080"
+      }
+    }
+  }
+}

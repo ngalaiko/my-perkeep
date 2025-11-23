@@ -2,8 +2,8 @@
 	"identity": "4DAA1FB8B7EBFEFC",
 	"identitySecretRing": "/var/perkeep/identity-secring.gpg",
 
-	"auth": "tailscale:full-access-to-tailnet",
-	"listen": "tailscale:/var/perkeep/tsnet-perkeep",
+	"auth": "none",
+	"listen": ":8080",
 
 	"postgres": "neondb_owner@ep-damp-bread-agosdv49-pooler.c-2.eu-central-1.aws.neon.tech:${NEONTECH_PASSWORD}",
 
