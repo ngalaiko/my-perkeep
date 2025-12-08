@@ -40,8 +40,8 @@ RUN sha256sum /tmp/perkeep-linux-amd64.tar.gz && \
     chmod +x /usr/local/bin/perkeepd && \
     rm -rf /tmp/*
 # install tailscale
-COPY --from=ghcr.io/tailscale/tailscale:v1.90.6 /usr/local/bin/tailscale /usr/local/bin/tailscale
-COPY --from=ghcr.io/tailscale/tailscale:v1.90.6 /usr/local/bin/tailscaled /usr/local/bin/tailscaled
+COPY --from=ghcr.io/tailscale/tailscale:latest /usr/local/bin/tailscale  /usr/local/bin/tailscale
+COPY --from=ghcr.io/tailscale/tailscale:latest /usr/local/bin/tailscaled /usr/local/bin/tailscaled
 # add config files files
 COPY etc/ /etc/
 # add user for perkeep process
