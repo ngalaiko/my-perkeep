@@ -5,7 +5,7 @@
 	"auth": "none",
 	"listen": ":8080",
 
-	"postgres": "neondb_owner@ep-damp-bread-agosdv49-pooler.c-2.eu-central-1.aws.neon.tech:${NEONTECH_PASSWORD}",
+	"memoryIndex": true,
 
 	"b2": "0036cfed748e70c0000000001:${BACKBLAZE_SECRET_KEY}:galaiko-rocks-perkeep:s3.eu-central-003.backblazeb2.com",
 	"packRelated": true
